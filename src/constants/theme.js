@@ -8,6 +8,7 @@ export const theme = {
     border: '#add8e6',
     tableHead: 'rgba(240, 248, 255, 0.3)',
     tableBody: 'rgba(240, 248, 255, 0.2)',
+    error: '#D50000',
     transparent: 'transparent',
   },
   space: [0, 2, 4, 8, 16, 32, 64, 128, 256],
