@@ -1,5 +1,5 @@
 import React from 'react';
-import { FcConferenceCall, FcPhoneAndroid } from 'react-icons/fc';
+import { FcConferenceCall, FcPhoneAndroid, FcCancel } from 'react-icons/fc';
 import { useSelector } from 'react-redux';
 
 import {
@@ -13,6 +13,7 @@ import {
   ContactListTable,
   ContactListTbody,
   ContactListThead,
+  ErrorRequest,
 } from './ContactList.styled';
 
 const ContactList = () => {
@@ -28,10 +29,12 @@ const ContactList = () => {
           <th>
             {isLoading && !error && <Loader />}
             {!isLoading && <FcConferenceCall size={40} />}
+            {error && <FcCancel size={40} />}
           </th>
           <th>
             {isLoading && !error && <Loader />}
             {!isLoading && <FcPhoneAndroid size={40} />}
+            {error && <ErrorRequest>Error! Try again!</ErrorRequest>}
           </th>
         </tr>
       </ContactListThead>
