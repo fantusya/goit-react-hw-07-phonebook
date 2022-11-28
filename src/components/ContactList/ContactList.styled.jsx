@@ -32,3 +32,10 @@ export const ContactListTbody = styled.tbody`
     background-color: ${p => p.theme.colors.transparent};
   }
 `;
+
+export const ErrorRequest = styled.b`
+  font-size: ${p => p.theme.fontSizes.ml};
+  font-family: ${p => p.theme.fonts.body};
+
+  color: ${p => p.theme.colors.error};
+`;
