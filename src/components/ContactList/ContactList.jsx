@@ -3,6 +3,7 @@ import { FcConferenceCall, FcPhoneAndroid, FcCancel } from 'react-icons/fc';
 import { useSelector } from 'react-redux';
 
 import {
+  selectContacts,
   selectIsLoading,
   selectError,
   selectVisibleContacts,
@@ -19,6 +20,7 @@ import {
 const ContactList = () => {
   const visibleContacts = useSelector(selectVisibleContacts);
 
+  const contacts = useSelector(selectContacts);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
 
@@ -28,13 +30,19 @@ const ContactList = () => {
         <tr>
           <th>
             {isLoading && !error && <Loader />}
-            {!isLoading && <FcConferenceCall size={40} />}
+            {!isLoading && contacts.length !== 0 && (
+              <FcConferenceCall size={40} />
+            )}
             {error && <FcCancel size={40} />}
           </th>
           <th>
             {isLoading && !error && <Loader />}
-            {!isLoading && <FcPhoneAndroid size={40} />}
-            {error && <ErrorRequest>Error! Try again!</ErrorRequest>}
+            {!isLoading && contacts.length !== 0 && (
+              <FcPhoneAndroid size={40} />
+            )}
+            {error && contacts.length === 0 && (
+              <ErrorRequest>Error! Try again!</ErrorRequest>
+            )}
           </th>
         </tr>
       </ContactListThead>
