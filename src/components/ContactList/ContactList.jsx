@@ -2,34 +2,36 @@ import React from 'react';
 import { FcConferenceCall, FcPhoneAndroid } from 'react-icons/fc';
 import { useSelector } from 'react-redux';
 
-import { getContacts, getFilter } from 'redux/selectors';
+import {
+  selectIsLoading,
+  selectError,
+  selectVisibleContacts,
+} from 'redux/selectors';
 import ContactItem from 'components/ContactItem';
+import Loader from 'components/Loader';
 import {
   ContactListTable,
   ContactListTbody,
   ContactListThead,
 } from './ContactList.styled';
 
-function getVisibleContacts(contacts, filterValue) {
-  return contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filterValue.toLowerCase())
-  );
-}
-
 const ContactList = () => {
-  const contacts = useSelector(getContacts);
-  const filterValue = useSelector(getFilter);
-  const visibleContacts = getVisibleContacts(contacts, filterValue);
+  const visibleContacts = useSelector(selectVisibleContacts);
+
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
 
   return (
     <ContactListTable>
       <ContactListThead>
         <tr>
           <th>
-            <FcConferenceCall size={40} />
+            {isLoading && !error && <Loader />}
+            {!isLoading && <FcConferenceCall size={40} />}
           </th>
           <th>
-            <FcPhoneAndroid size={40} />
+            {isLoading && !error && <Loader />}
+            {!isLoading && <FcPhoneAndroid size={40} />}
           </th>
         </tr>
       </ContactListThead>

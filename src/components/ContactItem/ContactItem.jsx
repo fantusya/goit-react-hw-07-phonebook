@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { FcFullTrash } from 'react-icons/fc';
 
-import { deleteContact } from 'redux/contactsSlice';
+import { deleteContact } from 'redux/operations';
 import { DeleteBtn } from './ContactItem.styled';
 
 const ContactItem = ({ contact }) => {

@@ -2,10 +2,9 @@ import { Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import shortid from 'shortid';
 
-import { addContact } from 'redux/contactsSlice';
-import { getContacts } from 'redux/selectors';
+import { addContact } from 'redux/operations';
+import { selectContacts } from 'redux/selectors';
 
 import {
   Form,
@@ -34,7 +33,7 @@ const validationSchema = Yup.object({
 const ContactForm = () => {
   const dispatch = useDispatch();
 
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
 
   const handleSubmit = ({ name, number }, { resetForm }) => {
     const isNameExistInPhonebook = contacts.some(
@@ -47,13 +46,7 @@ const ContactForm = () => {
       return;
     }
 
-    const contact = {
-      name,
-      number,
-      id: shortid.generate(),
-    };
-
-    dispatch(addContact(contact));
+    dispatch(addContact({ name, number }));
     resetForm();
   };
 

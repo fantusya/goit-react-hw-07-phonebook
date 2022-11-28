@@ -1,5 +1,8 @@
+import { useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
+import { useDispatch } from 'react-redux';
 
+import { fetchContacts } from 'redux/operations';
 import { PageTitle, ContactsTitle } from './App.styled';
 import ContactForm from '../ContactForm';
 import Filter from '../Filter';
@@ -7,6 +10,12 @@ import ContactList from '../ContactList';
 import { Box } from '../Box/Box.jsx';
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
   return (
     <Box
       pt={5}
